@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Encriptador de texto</title>
-	<link rel="stylesheet" type="text/css" href="Encriptador_de_texto.css">
+	<link rel="stylesheet" type="text/css" href="styles.css">
 	<link href="https://fonts.googleapis.com/css2?family=Calligraffitti&family=Inter&family=Montserrat:wght@300&display=swap" rel="stylesheet">
 	<script src="https://kit.fontawesome.com/79ab2276fe.js" crossorigin="anonymous"></script>
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
@@ -24,7 +24,7 @@
 		</div>
 		<div class="visor">
 			<div id="caja-texto"><p id="texto"></p></div>
-			<img id="dibujo" src="muñeco.png">
+			<img id="dibujo" src="C:\Users\Sebastian\Desktop\Vale\OracleONE\Challenges\muñeco.png">
 			<div id="espacio-texto">
 				<p id="mensaje-no-encontrado">Ningún mensaje fue encontrado</p>
 				<p id="ingrese-mensaje">Ingresa el texto que desees encriptar o desencriptar.</p>
@@ -53,37 +53,10 @@
 
 			let mensaje = textarea.value;
 			console.log(mensaje);
-			let nuevoMensaje = "";
 
 			if (mensaje != ""){
-				for(let posicion = 0; posicion < mensaje.length; posicion++){
-			
-						if (mensaje[posicion] == "e") {
-							nuevoMensaje += "enter";
-			
-					    } 
-			
-					    else if (mensaje[posicion] == "i"){
-					    	nuevoMensaje += "imes";
-			
-					    }
-			
-					    else if (mensaje[posicion] == "a") {
-					    	nuevoMensaje += "ai";
-					    }
-			
-					    else if (mensaje[posicion] == "o") {
-					    	nuevoMensaje += "ober";
-					    } 
-			
-					    else if (mensaje[posicion] == "u"){
-					    	nuevoMensaje += "ufat"; 
-					    }
-			
-					    else {
-					    	nuevoMensaje += mensaje[posicion];
-					    }
-				}
+				let nuevoMensaje = mensaje.replaceAll("e","enter").replaceAll("i", "imes").replaceAll("a","ai").replaceAll("o","ober").replaceAll("u","ufat");
+				
 				document.getElementById("dibujo").style.display = "none";
 				document.getElementById("espacio-texto").style.display = "none";
 				document.querySelector("#texto").textContent = nuevoMensaje;
