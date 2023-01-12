@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Encriptador de texto</title>
+	<link rel="stylesheet" type="text/css" href="Encriptador_de_texto.css">
+	<link href="https://fonts.googleapis.com/css2?family=Calligraffitti&family=Inter&family=Montserrat:wght@300&display=swap" rel="stylesheet">
+	<script src="https://kit.fontawesome.com/79ab2276fe.js" crossorigin="anonymous"></script>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+</head>
+<body>
+	<header><h1>Encriptador de texto</h1></header>
+	<!--<input type="text" placeholder="Ingrese su texto aquí" id="mensaje">-->
+	<main>
+		<div id="cuerpo">
+			<textarea placeholder="Ingrese su texto aquí"></textarea>
+			<p class="importante"><i class="fa-solid fa-circle-exclamation"></i> Solo letras minúsculas y sin acentos</p>
+			<div class="botones">
+				<button id="encriptar">Encriptar</button>
+				<button id="desencriptar">Desencriptar</button>
+			</div>
+		</div>
+		<div class="visor">
+			<div id="caja-texto"><p id="texto"></p></div>
+			<img id="dibujo" src="muñeco.png">
+			<div id="espacio-texto">
+				<p id="mensaje-no-encontrado">Ningún mensaje fue encontrado</p>
+				<p id="ingrese-mensaje">Ingresa el texto que desees encriptar o desencriptar.</p>
+			</div>
+			<button id="copiar">Copiar mensaje</button>
+		</div>
+	</main>
+
+	<script type="text/javascript">
+
+		var textarea = document.querySelector("textarea");
+
+		function copiarMensaje(){
+			var enlace = document.getElementById("texto");
+	        var inputFalso = document.createElement("input");
+	        inputFalso.setAttribute("value", enlace.innerHTML);
+			document.body.appendChild(inputFalso);
+			inputFalso.select();
+			document.execCommand("copy");
+			document.body.removeChild(inputFalso);
+			swal("Texto copiado con éxito en el portapapeles", "", "success", {
+      		button: "Aceptar",})
+      	}
+
+		function encriptarMensaje(){
+
+			let mensaje = textarea.value;
+			console.log(mensaje);
+			let nuevoMensaje = "";
+
+			if (mensaje != ""){
+				for(let posicion = 0; posicion < mensaje.length; posicion++){
+			
+						if (mensaje[posicion] == "e") {
+							nuevoMensaje += "enter";
+			
+					    } 
+			
+					    else if (mensaje[posicion] == "i"){
+					    	nuevoMensaje += "imes";
+			
+					    }
+			
+					    else if (mensaje[posicion] == "a") {
+					    	nuevoMensaje += "ai";
+					    }
+			
+					    else if (mensaje[posicion] == "o") {
+					    	nuevoMensaje += "ober";
+					    } 
+			
+					    else if (mensaje[posicion] == "u"){
+					    	nuevoMensaje += "ufat"; 
+					    }
+			
+					    else {
+					    	nuevoMensaje += mensaje[posicion];
+					    }
+				}
+				document.getElementById("dibujo").style.display = "none";
+				document.getElementById("espacio-texto").style.display = "none";
+				document.querySelector("#texto").textContent = nuevoMensaje;
+				document.getElementById("copiar").style.display = "block";
+				document.getElementById("caja-texto").style.display = "block";
+
+			} 
+
+			console.log(nuevoMensaje);
+			
+		}
+
+		function desencriptarMensaje(){
+
+			let mensaje = textarea.value;
+
+			if(mensaje != "") {
+				let nuevoMensaje = mensaje.replaceAll("enter","e").replaceAll("imes", "i").replaceAll("ai","a").replaceAll("ober","o").replaceAll("ufat","u");
+				console.log(nuevoMensaje);
+				document.getElementById("dibujo").style.display = "none";
+				document.getElementById("espacio-texto").style.display = "none";
+				document.querySelector("#texto").textContent = nuevoMensaje;
+				document.getElementById("copiar").style.display = "block";
+				document.getElementById("caja-texto").style.display = "block";
+			}
+			
+		}
+
+
+		var encriptar = document.querySelector("#encriptar"); 
+		encriptar.onclick = encriptarMensaje; 
+		var desencriptar = document.querySelector("#desencriptar"); 
+		desencriptar.onclick = desencriptarMensaje; 
+		var copiar = document.querySelector("#copiar");
+		copiar.onclick = copiarMensaje;
+
+	</script>
+
+</body>
+</html>
